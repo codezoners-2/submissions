@@ -1,17 +1,21 @@
+//CAR
 int circleX =25;
 int circleY= 10;
 int circleW = 50;
 int circleH = 50;
+//RAIN
 int rainStartX= 10;
 int rainStartY=25;
 int rainStopX= rainStartX;
 int rainStopY= rainStartY+5;
+//LIGHT
 int rectX=500;
 int rectY=170;
 int rectW=50;
 int rectH=100;
 int circle1Col= color (255, 0, 0);
 int circle3Col= color (255);
+//CAR ANIM
 int carLimit= 300;
 
 void setup()
