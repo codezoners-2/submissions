@@ -9,7 +9,6 @@ void setup()
 void draw()
 {
   flock();
-  //makeWhite();
 }
 
 void flock()
@@ -18,16 +17,14 @@ void flock()
   {
     for (int owlY = 40; owlY<height; owlY = owlY + space)
     {
-      int col = int(random(0, 100));
+      int col;
+      int wid = (int)dist(owlX, owlY, mouseX, mouseY);
+      if (wid/2 <= 10)  col = 0;
+      else col = int(random(0, 100));
       owl(owlX, owlY, col);
     }
   }
 }
-
-//void makeWhite()
-//{
-// 
-//}
 
 void owl(int x, int y, int g)
 {
