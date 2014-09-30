@@ -1,5 +1,3 @@
-int space = 40;
-
 void setup()
 {
   size(500, 500);
@@ -8,20 +6,22 @@ void setup()
 
 void draw()
 {
-  flock();
+  flock(10, 40, 200, 200, 30);
+  flock(400, 400, width, height, 50);
 }
 
-void flock()
+void flock(int startX, int startY, int endX, int endY, int spacing)
 {
-  for (int owlX = 10; owlX<width; owlX = owlX + space)
+
+  for (int owlX = startX; owlX<endX; owlX = owlX + spacing)
   {
-    for (int owlY = 40; owlY<height; owlY = owlY + space)
+    for (int owlY = startY; owlY<endY; owlY = owlY + spacing)
     {
-      int col;
-      int wid = (int)dist(owlX, owlY, mouseX, mouseY);
-      if (wid/2 <= 10)  col = 0;
-      else col = int(random(0, 100));
-      owl(owlX, owlY, col);
+      int owlColor;
+      int distFromOwl = (int)dist(owlX, owlY, mouseX, mouseY);
+      if (distFromOwl <= 20)  owlColor = 0;
+      else owlColor = int(random(0, 50));
+      owl(owlX, owlY, owlColor);
     }
   }
 }
