@@ -1,0 +1,119 @@
+int circleX = 0;
+int circleY = 0;
+int stepY = 5;
+int rectHeight = 25;
+int colour = 2;
+int oceanColour = 255;
+PImage fish;
+int imageX = 0;
+int imageY = 0;
+int m;
+
+void setup()
+{
+  size(500, 500);
+  noStroke();
+  circleX = int(random(0, 500));
+  colour = int(random(0, 3));
+  oceanColour = 255;
+  fish = loadImage("leftfish.png");
+  imageX = width*5/6;
+  imageY = height*5/6-10;
+}
+
+void draw()
+{
+  drawOcean();
+  pebbles();
+  drawDroplet();
+  drawFish();
+}
+
+void drawDroplet()
+{
+  if (colour == 0)
+  {
+    fill(255, 0, 0);
+  } else if (colour == 1)
+  {
+    fill(0, 255, 0);
+  } else if (colour == 2)
+  {
+    fill(0, 0, 255);
+  }
+
+  if (circleY>=(height-rectHeight))
+  {
+    circleY = 0;
+    circleX = int(random(0, 500));
+    rectHeight += 25;
+  }
+
+  ellipse(circleX, circleY, 20, 20);
+  circleY = circleY + stepY;
+
+  if (rectHeight >= height)
+  {
+    rectHeight = 25;
+  }
+}
+
+void drawOcean()
+{
+  background(255);
+
+  if (circleY>=(height-rectHeight))
+  {
+    oceanColour = colour;
+    colour = int(random(0, 3));
+  }
+
+  if (oceanColour == 0)
+  {
+    fill(255, 0, 0);
+  } else if (oceanColour == 1)
+  {
+    fill(0, 255, 0);
+  } else if (oceanColour == 2)
+  {
+    fill(0, 0, 255);
+  }
+
+  rect(0, (height-rectHeight), width, rectHeight);
+}
+
+void pebbles()
+{
+  fill(128);
+  for (int x = 10; x < width; x += 20)
+  {
+    ellipse(x, height, 20, 20);
+  }
+  fill(0, 0, 255);
+}
+
+void keyPressed()
+{
+  circleY = 0;
+  circleX = int(random(0, 500));
+}
+
+void mousePressed()
+{
+  circleY = 0;
+  circleX = int(random(0, 500));
+}
+
+void drawFish()
+{
+  m = millis();
+  m = m%5050;
+  if (rectHeight >= height/4)
+    image(fish, imageX, imageY, width/6, height/6);
+    imageX -= 3;
+  if (m >= 5000)
+  {
+    imageX = width*5/6;
+  }
+  
+}
