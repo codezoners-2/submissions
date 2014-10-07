@@ -104,7 +104,7 @@ void  ballBallInteraction()
       if (dist(posX[l], posY[l], posX[p], posY[p])<=(diamArray[l]/2+diamArray[p]/2))
 
       {
-        if (ballState [p] == false && ballState [l]==true)
+        if (ballState [p] == false && ballState [l]==true && p!= l)
         {
           //  ballState[p]=false;
           ballState [l]=false;
