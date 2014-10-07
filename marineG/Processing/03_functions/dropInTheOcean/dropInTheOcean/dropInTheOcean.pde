@@ -11,18 +11,21 @@ int oceanG= 0;
 int oceanB= 200;
 PImage img;
 PImage img2;
-int imgX=width;
-int imgY= 400;
-int img2X= 500;
+int imgX = -200;
+int imgY=400;
+int img2X = -200;
 int img2Y= 400;
+int dirX = 1;
+int stepX = 2;
 
 void setup()
 {
   size (500, 500);
   noStroke ();
   locX= random(0, width);
-  img=loadImage ("fish2.png");
-  img2=loadImage ("fish.png");
+  img=loadImage ("fish.png");
+  img2=loadImage ("fish2.png");
+  imgX = width;
 }
 
 void draw()
@@ -33,7 +36,7 @@ void draw()
   drawOcean();
   pebbles();
   drawFish();
- drawFish2();
+  drawFish2();
 }
 
 void keyPressed()
@@ -47,27 +50,34 @@ void keyPressed()
 
 void drawFish2()
 {
- int m=millis();
+  int m=millis();
   m=(m%5000);
- if (rectheight> height/4 )
+  if (rectheight> height/4 )
   {
- image(img2,img2X,img2Y, width/6, height/6);
- img2X=img2X-1; 
- if (img2X<0-m) img2X=500;
-  }  
+    image(img2, img2X, img2Y, width/6, height/6);
+    img2X=img2X-1; 
+    if (img2X<0-m) img2X=500;
+  }
 }
 
 void drawFish()
 {
-  int m=millis();
- m=(m%5000);
- if (rectheight> height/4)
+  int sec = millis()/1000;
+  
+  pushMatrix();
+  
+  translate(imgX, imgY);
+  scale(dirX, 1);
+  image(img, 0, 0, width/6, height/6);
+  imgX = imgX - (stepX * dirX);
+
+  if (imgX<0 || imgX>width)
   {
- image(img,imgX,imgY, width/6, height/6);
- imgX=imgX+1; 
- if (imgX>width+m) imgX=0;
+    dirX = dirX * -1;
+  }
+  popMatrix();
 }
-}
+
 void pebbles()
 {
   int pebblesY=height;
@@ -110,4 +120,3 @@ void drawOcean()
     if (rectheight>=height) rectheight =2;
   }
 }
-
