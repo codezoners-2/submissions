@@ -1,0 +1,42 @@
+<html>
+	{% set width = 300 %}
+	{% set height = 180 %}
+	{% set max_stripes = 4 %}
+	{% set stripe_array = [] %}
+	{% for i in range(max_stripes) %}
+		{% if i < request.form.stripes|int %}
+			{% if request.form.orientation == "v" %}
+				{% do stripe_array.append(width / request.form.stripes|int) %}
+			{% elif request.form.orientation == "h" %}
+				{% do stripe_array.append(height / request.form.stripes|int) %}
+			{% endif %}
+		{% else %}
+			{% do stripe_array.append(0) %}
+		{% endif %}
+	{% endfor %}
+	<head>
+		<title>{{request.form.countryname|capitalize}}</title>
+	</head>
+	<body style="background-color: #A0A0A0">
+		<div>
+			<h1>{{request.form.countryname|capitalize}}</h1>
+			<div>
+				{% if request.form.orientation == "v" %}
+				<div style="width: {{width}}px; height: {{height}}px">
+					<span style="float: left; width: {{stripe_array[0]}}px; height: {{height}}px; background-color: {{request.form.colour1}};"></span>
+					<span style="float: left; width: {{stripe_array[1]}}px; height: {{height}}px; background-color: {{request.form.colour2}};"></span>
+					<span style="float: left; width: {{stripe_array[2]}}px; height: {{height}}px; background-color: {{request.form.colour3}};"></span>
+					<span style="float: left; width: {{stripe_array[3]}}px; height: {{height}}px; background-color: {{request.form.colour4}};"></span>
+				</div>
+				{% elif request.form.orientation == "h" %}
+				<div style="width: {{width}}px; height: {{height}}px">
+					<span style="float: left; width: {{width}}px; height: {{stripe_array[0]}}px; background-color: {{request.form.colour1}}"></span>
+					<span style="float: left; width: {{width}}px; height: {{stripe_array[1]}}px; background-color: {{request.form.colour2}}"></span>
+					<span style="float: left; width: {{width}}px; height: {{stripe_array[2]}}px; background-color: {{request.form.colour3}}"></span>
+					<span style="float: left; width: {{width}}px; height: {{stripe_array[3]}}px; background-color: {{request.form.colour4}}"></span>
+				</div>
+				{% endif %}
+			</div>
+		</div>	
+	</body>
+</html>
