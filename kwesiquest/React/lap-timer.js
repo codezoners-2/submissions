@@ -109,7 +109,8 @@ var Timer = React.createClass({
         for (; last>0; last--) {
             if (l[last] !== undefined) break;
         }
-        var lastStateElapsed = l.length ? l[last].props.lapTime : 0;
+        var lastStateElapsed = l.filter(Object).length ?
+                                            l[last].props.lapTime : 0;
 		l.push(<Lap lapTime={this.state.elapsed}
 					splitTime={this.state.elapsed - lastStateElapsed}
 					lapRemove={this.removeLap.bind(this, i)}
