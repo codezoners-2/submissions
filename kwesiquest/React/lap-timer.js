@@ -89,15 +89,14 @@ var Timer = React.createClass({
                 keyArr.push(l[j].props.key);
             }
         }
+        var next = keyArr[keyArr.indexOf(k)+1];
         if (keyArr.indexOf(k) < keyArr.length-1 && keyArr.length-1) {
-            l[keyArr[keyArr.indexOf(k)+1]] =
-            <Lap
-              lapTime={l[keyArr[keyArr.indexOf(k)+1]].props.lapTime}
-              splitTime={l[keyArr[keyArr.indexOf(k)+1]].props.splitTime
-                + l[k].props.splitTime}
-              lapRemove={l[keyArr[keyArr.indexOf(k)+1]].props.lapRemove}
-              key={l[keyArr[keyArr.indexOf(k)+1]].props.key}
-             />;
+            l[next] = <Lap lapTime={l[next].props.lapTime}
+                           splitTime={l[next].props.splitTime +
+                               l[k].props.splitTime}
+                           lapRemove={l[next].props.lapRemove}
+                           key={l[next].props.key}
+                        />;
         }
 		delete l[k];
 		this.setState({laps: l});
